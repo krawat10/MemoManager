@@ -6,9 +6,9 @@ namespace MemoContainer.Core.Domain
     {
         public Guid Id { get; private set; }
 
-        public Entity()
+        public Entity(Guid id)
         {
-            Id = Guid.NewGuid();
+            Id = id;
         }
         
         protected void CheckAndThrowIfNullOrWhitespace(string word, string parameterName)

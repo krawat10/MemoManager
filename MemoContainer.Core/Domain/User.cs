@@ -2,34 +2,53 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
+using System.Text.RegularExpressions;
 
 namespace MemoContainer.Core.Domain
 {
     public class User : Entity
     {
-        public string FirstName { get; private set; }
-        public string LastName { get; private set; }
-        public string Role { get; private set; }
-        public string Email { get; private set; }
-
-        public IEnumerable<Memo> Memos => _memos;
-        public IEnumerable<Memo> FinishedMemos => _memos.Where(memo => memo.FinishetAt.HasValue);
-        public IEnumerable<Memo> NotFinishedMemos => _memos.Except(FinishedMemos);
-
         public static readonly IEnumerable<string> Roles = new List<string>
         {
             "admin",
             "user"
         };
 
-        private ISet<Memo> _memos = new HashSet<Memo>();
+        private readonly ISet<Memo> _memos = new HashSet<Memo>();
 
-        public User(string firstName, string lastName, string role, string email)
+        public User(Guid id, string firstName, string lastName, string role, string email, string password)
+            : base(id)
         {
+            SetPassword(password);
             SetEmail(email);
             SetFirstName(firstName);
             SetLastName(lastName);
             SetRole(role);
+        }
+
+        public string FirstName { get; private set; }
+        public string LastName { get; private set; }
+        public string Role { get; private set; }
+        public string Email { get; private set; }
+        public string Password { get; private set; }
+
+        public IEnumerable<Memo> Memos => _memos;
+        public IEnumerable<Memo> FinishedMemos => _memos.Where(memo => memo.FinishetAt.HasValue);
+        public IEnumerable<Memo> NotFinishedMemos => _memos.Except(FinishedMemos);
+
+        private void SetPassword(string password)
+        {
+            CheckAndThrowIfNullOrWhitespace(password, nameof(password));
+
+            var regex = new Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,15}$");
+
+            if (!regex.IsMatch(password))
+                throw new Exception($"User with id: {Id} must have password " +
+                                    $"with length between 8 and 15 symbols and" +
+                                    $" at least 1 number, 1 lowercase letter," +
+                                    $" 1 uppercase letter and special character.");
+
+            Password = password;
         }
 
         public void SetEmail(string email)
@@ -52,10 +71,7 @@ namespace MemoContainer.Core.Domain
         {
             CheckAndThrowIfNullOrWhitespace(role, nameof(role));
 
-            if (!Roles.Contains(role.ToLowerInvariant()))
-            {
-                throw new Exception("Incorrect role.");
-            }
+            if (!Roles.Contains(role.ToLowerInvariant())) throw new Exception("Incorrect role.");
 
             Role = role;
         }

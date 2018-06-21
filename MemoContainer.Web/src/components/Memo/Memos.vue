@@ -1,10 +1,14 @@
 <template>
-    <div class="card-group mb-3">
-        <Memo 
-            v-for="memo in memos" 
-            :key="memo.id" 
-            :content="memo"
-            class="card"/>
+    <div>
+        <h1>Memos</h1>
+        <hr>
+        <div class="card-group mb-3">
+            <Memo 
+                v-for="memo in memos" 
+                :key="memo.id" 
+                :content="memo"
+                class="card"/>
+        </div>
     </div>
 </template>
 

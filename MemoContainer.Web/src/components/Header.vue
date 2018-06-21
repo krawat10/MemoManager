@@ -9,10 +9,9 @@
         <b-collapse is-nav id="nav_collapse">
 
             <b-navbar-nav>
-            <router-link to="/memos" is="b-nav-item">Memos</router-link>
-            <b-nav-item href="#" disabled>Account</b-nav-item>
-            <b-nav-item href="#" disabled>Sign-In</b-nav-item>
-            <b-nav-item href="#" disabled>Sign-Up</b-nav-item>
+            <router-link :to="{ name: 'Memos' }" is="b-nav-item">Memos</router-link>
+            <router-link :to="{ name: 'SignIn' }" is="b-nav-item">Sign-In</router-link>
+            <router-link  :to="{ name: 'SignUp' }" is="b-nav-item">Sign-Up</router-link>
             </b-navbar-nav>
         </b-collapse>
         </b-navbar>

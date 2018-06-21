@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using MemoContainer.DataAccess.Domain;
+using MemoContainer.Core.Domain;
 
-namespace MemoContainer.DataAccess.Repositories
+namespace MemoContainer.Core.Repositories
 {
     public interface IUserRepository
     {

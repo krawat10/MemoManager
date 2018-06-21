@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 
-namespace MemoContainer.DataAccess.Domain
+namespace MemoContainer.Core.Domain
 {
     public class User : Entity
     {

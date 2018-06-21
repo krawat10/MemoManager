@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MemoContainer.DataAccess.Domain
+namespace MemoContainer.Core.Domain
 {
     public class Entity
     {

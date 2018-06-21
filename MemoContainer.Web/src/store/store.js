@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
+        isAuthorized: false,
         memos: [{
                 id: 'sdasd21312',
                 name: 'Memo one',
@@ -29,9 +30,13 @@ export default new Vuex.Store({
         }
     },
     mutations: {
+        fetchAuthentication(state, credentials){
 
+        }
     },
     actions: {
-
+        logIn({ commit }, credentials){
+            
+        }
     },
 });

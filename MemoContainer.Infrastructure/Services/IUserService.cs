@@ -6,10 +6,12 @@ namespace MemoContainer.Infrastructure.Services
 {
     public interface IUserService
     {
-        Task RegisterAsync(Guid userId, string email, string firstName, string lastName, string password, string role = "user");
+        Task RegisterAsync(Guid userId, string nickname, string email, string firstName, string lastName, string password, string role = "user");
 
-        Task<TokenDTO> LoginAsync(string email, string password);
+        Task<TokenDTO> LoginByEmailAsync(string email, string password);
 
-        Task<AccountDTO> GetAccountAsync(Guid userId);
+        Task<TokenDTO> LoginByNicknameAsync(string nickname, string password);
+
+        Task<UserDTO> GetAccountAsync(Guid userId);
     }
 }

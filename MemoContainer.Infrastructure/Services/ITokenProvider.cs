@@ -4,8 +4,8 @@ using MemoContainer.Infrastructure.DTOs;
 
 namespace MemoContainer.Infrastructure.Services
 {
-    public interface IJwtHandler
+    public interface ITokenProvider
     {
-        Task<TokenDTO> CreateToken(Guid userId, string role);
+        TokenDTO GetToken(Guid userId, string role);
     }
 }

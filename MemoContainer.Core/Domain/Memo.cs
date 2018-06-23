@@ -11,7 +11,7 @@ namespace MemoContainer.Core.Domain
         public DateTime? FinishetAt { get; private set; }
         public Guid UserId { get; private set; }
 
-        public Memo(string name, string description, Guid userId)
+        public Memo(Guid id,string name, string description, Guid userId) : base(id)
         {
             SetName(name);
             SetDescription(description);

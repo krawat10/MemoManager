@@ -16,9 +16,10 @@ namespace MemoContainer.Core.Domain
 
         private readonly ISet<Memo> _memos = new HashSet<Memo>();
 
-        public User(Guid id, string firstName, string lastName, string role, string email, string password)
+        public User(Guid id, string nickname, string firstName, string lastName, string role, string email, string password)
             : base(id)
         {
+            SetNickname(nickname);
             SetPassword(password);
             SetEmail(email);
             SetFirstName(firstName);
@@ -26,6 +27,13 @@ namespace MemoContainer.Core.Domain
             SetRole(role);
         }
 
+        private void SetNickname(string nickname)
+        {
+            CheckAndThrowIfNullOrWhitespace(nickname, nameof(nickname));
+            Nickname = nickname;
+        }
+
+        public string Nickname { get; private set; }
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
         public string Role { get; private set; }

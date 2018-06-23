@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using MemoContainer.Infrastructure.Commands;
 using MemoContainer.Infrastructure.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MemoContainer.Api.Controllers
@@ -15,10 +16,23 @@ namespace MemoContainer.Api.Controllers
             _userService = userService;
         }
 
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult> Get()
+        {
+            if (User == null)
+            {
+                return new UnauthorizedResult();
+            }
+            var userId = User.Identity.IsAuthenticated ? Guid.Parse(User.Identity.Name) : Guid.Empty;
+
+            return await _userService.GetAccountAsync(userId);1
+        }
+
         [HttpPost("login")]
         public async Task<ActionResult> Login(Login command)
         {
-            return Json(await _userService.LoginAsync(command.Email, command.Password));
+            return Json(await _userService.LoginByEmailAsync(command.Email, command.Password));
         }
 
         [HttpPost("register")]
@@ -26,6 +40,7 @@ namespace MemoContainer.Api.Controllers
         {
             await _userService.RegisterAsync(
                 Guid.NewGuid(),
+                command.Nickname,
                 command.Email,
                 command.FirstName,
                 command.LastName,

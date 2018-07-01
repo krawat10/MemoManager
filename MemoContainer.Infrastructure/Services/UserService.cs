@@ -72,7 +72,7 @@ namespace MemoContainer.Infrastructure.Services
             return _tokenProvider.GetToken(user.Id, user.Role);
         }
 
-        public async Task<UserDTO> GetAccountAsync(Guid userId)
+        public async Task<UserDTO> GetUserAsync(Guid userId)
         {
             var user = await _userRepository.GetByIdAsync(userId);
 

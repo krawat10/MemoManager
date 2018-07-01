@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using MemoContainer.Infrastructure.Mappers;
 using MemoContainer.Infrastructure.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
 namespace MemoContainer.Api
 {
@@ -48,6 +50,8 @@ namespace MemoContainer.Api
                         ValidateAudience = false
                     };
                 });
+
+            services.AddSingleton<IMapper>(MapperConfig.Initalize());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -12,6 +12,6 @@ namespace MemoContainer.Infrastructure.Services
 
         Task<TokenDTO> LoginByNicknameAsync(string nickname, string password);
 
-        Task<UserDTO> GetAccountAsync(Guid userId);
+        Task<UserDTO> GetUserAsync(Guid userId);
     }
 }

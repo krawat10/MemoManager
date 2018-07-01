@@ -26,7 +26,7 @@ namespace MemoContainer.Api.Controllers
             }
             var userId = User.Identity.IsAuthenticated ? Guid.Parse(User.Identity.Name) : Guid.Empty;
 
-            return await _userService.GetAccountAsync(userId);1
+            return Json(await _userService.GetUserAsync(userId));
         }
 
         [HttpPost("login")]
